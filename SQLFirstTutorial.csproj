@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appIcon.png" />
+    <None Remove="databaseIcon.png" />
+    <None Remove="passwordIcon.png" />
+    <None Remove="userIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="appIcon.png" />
+    <Resource Include="databaseIcon.png" />
+    <Resource Include="passwordIcon.png" />
+    <Resource Include="userIcon.png" />
+  </ItemGroup>
+
+</Project>
