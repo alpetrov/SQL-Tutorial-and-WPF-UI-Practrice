@@ -22,9 +22,15 @@ namespace SQLFirstTutorial
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool loginChanged;
+        bool passwordChanged;
+        bool nameChanged;
+        bool surnameChanged;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.Width = 400;
         }
 
         Point lastPoint;
@@ -85,11 +91,158 @@ namespace SQLFirstTutorial
             this.createPasswordBox.Visibility = Visibility.Visible;
             this.dhaLabel.Visibility = Visibility.Hidden;
             this.registerButton.Visibility = Visibility.Hidden;
+            this.surnameLabel.Visibility = Visibility.Visible;
+            this.nameLabel.Visibility = Visibility.Visible;
+
+            this.Width = 720;
         }
 
         private void backToLoginButton_Click(object sender, RoutedEventArgs e)
         {
+            this.labelAutorization.Visibility = Visibility.Visible;
+            this.labelRegistration.Visibility = Visibility.Hidden;
+            this.loginButton.Visibility = Visibility.Visible;
+            this.createAccountButton.Visibility = Visibility.Hidden;
+            this.backToLoginButton.Visibility = Visibility.Hidden;
+            this.passwordBox.Visibility = Visibility.Visible;
+            this.createPasswordBox.Visibility = Visibility.Hidden;
+            this.dhaLabel.Visibility = Visibility.Visible;
+            this.registerButton.Visibility = Visibility.Visible;
+            this.surnameLabel.Visibility = Visibility.Hidden;
+            this.nameLabel.Visibility = Visibility.Hidden;
 
+            this.Width = 400;
+        }
+
+        private void createAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void loginBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            loginChanged = true;
+            loginBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
+        }
+
+        private void loginBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!loginChanged)
+            {
+                if (this.loginBox.Text == "")
+                {
+                    this.loginBox.Text = "Login";
+                }
+            }
+        }
+
+        private void loginBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!loginChanged)
+            {
+                this.loginBox.Text = "";
+            }
+        }
+
+        private void passwordBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!passwordChanged)
+            {
+                if (this.passwordBox.Password == "")
+                {
+                    this.passwordBox.Password = "password";
+                }
+            }
+        }
+
+        private void passwordBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!passwordChanged)
+            {
+                this.passwordBox.Password = "";
+            }
+        }
+
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            passwordChanged = true;
+            passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
+        }
+
+        private void nameBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            nameChanged = true;
+            nameBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
+        }
+
+        private void nameBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!nameChanged)
+            {
+                this.nameBox.Text = "";
+            }
+        }
+
+        private void nameBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!nameChanged)
+            {
+                if (this.nameBox.Text == "")
+                {
+                    this.nameBox.Text = "Name";
+                }
+            }
+        }
+
+        private void surnameBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            surnameChanged = true;
+            surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
+        }
+
+        private void surnameBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!surnameChanged)
+            {
+                this.surnameBox.Text = "";
+            }
+        }
+
+        private void surnameBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!surnameChanged)
+            {
+                if (this.surnameBox.Text == "")
+                {
+                    this.surnameBox.Text = "Surname";
+                }
+            }
+        }
+
+        private void createPasswordBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!passwordChanged)
+            {
+                this.createPasswordBox.Text = "";
+            }
+        }
+
+        private void createPasswordBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if(!passwordChanged)
+            {
+                if (this.createPasswordBox.Text == "")
+                {
+                    this.createPasswordBox.Text = "Surname";
+                }
+            }
+        }
+
+        private void createPasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            passwordChanged = true;
+            createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
         }
     }
 }
