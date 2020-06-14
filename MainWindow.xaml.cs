@@ -234,7 +234,7 @@ namespace SQLFirstTutorial
             {
                 if (this.createPasswordBox.Text == "")
                 {
-                    this.createPasswordBox.Text = "Surname";
+                    this.createPasswordBox.Text = "Password";
                 }
             }
         }
