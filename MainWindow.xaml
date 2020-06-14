@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SQLFirstTutorial"
         mc:Ignorable="d"
-        Title="SQL Tutorial" Height="450" Width="404" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="0,0,0,0" Icon="/appIcon.png">
-    <Grid MouseMove="Grid_MouseMove" MouseDown="Grid_MouseDown">
+        Title="SQL Tutorial" Height="471" Width="404" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="0,0,0,0" Icon="/appIcon.png">
+    <Grid MouseMove="Grid_MouseMove" MouseDown="Grid_MouseDown" Height="435" VerticalAlignment="Top">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="0"/>
@@ -18,11 +18,17 @@
                 <BlurEffect/>
             </DockPanel.Effect>
         </DockPanel>
-        <Label Content="Autorization" Margin="0,40,0,0" FontSize="32" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="labelAutorization" Content="Autorization" Margin="0,40,0,0" FontSize="32" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible"/>
         <Image HorizontalAlignment="Left" Height="64" Margin="27,148,0,0" VerticalAlignment="Top" Width="64" Source="/userIcon.png"/>
         <TextBox x:Name="loginBox" HorizontalAlignment="Left" Margin="91,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Height="46" Background="White" Foreground="#FF020202" FontSize="20"/>
         <Image HorizontalAlignment="Left" Height="64" Margin="17,231,0,0" VerticalAlignment="Top" Width="74" Source="/passwordIcon.png"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="91,231,0,0" VerticalAlignment="Top" Width="236" Height="46"/>
-        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="65" Width="208" FontSize="24" Background="#FF61EC8D" Cursor="Hand" Click="loginButton_Click"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="0,294,0,0" VerticalAlignment="Top" Height="65" Width="208" FontSize="24" Background="#FF61EC8D" Cursor="Hand" Click="loginButton_Click"/>
+        <Button x:Name="registerButton" Content="Create an account" HorizontalAlignment="Center" Margin="0,392,0,0" VerticalAlignment="Top" Width="208" Height="32" RenderTransformOrigin="0.495,0.776" FontSize="20" Click="registerButton_Click"/>
+        <Label x:Name="dhaLabel" Content="Don't have an account?" Margin="0,359,0,0" FontSize="20" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="labelRegistration" Content="Registration" Margin="0,40,0,0" FontSize="32" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Button x:Name="createAccountButton" Content="Register" HorizontalAlignment="Center" Margin="0,294,0,0" VerticalAlignment="Top" Height="65" Width="208" FontSize="24" Background="#FF61EC8D" Cursor="Hand" Click="loginButton_Click" IsCancel="True" Visibility="Hidden"/>
+        <Button x:Name="backToLoginButton" Content="Back to login" HorizontalAlignment="Left" Margin="311,397,0,0" VerticalAlignment="Top" Height="31" Visibility="Hidden" Click="backToLoginButton_Click"/>
+        <TextBox x:Name="createPasswordBox" HorizontalAlignment="Left" Margin="91,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Height="46" Background="White" Foreground="#FF020202" FontSize="20" Visibility="Hidden"/>
     </Grid>
 </Window>

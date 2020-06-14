@@ -73,5 +73,23 @@ namespace SQLFirstTutorial
                 MessageBox.Show("No");
             }
         }
+
+        private void registerButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.labelAutorization.Visibility = Visibility.Hidden;
+            this.labelRegistration.Visibility = Visibility.Visible;
+            this.loginButton.Visibility = Visibility.Hidden;
+            this.createAccountButton.Visibility = Visibility.Visible;
+            this.backToLoginButton.Visibility = Visibility.Visible;
+            this.passwordBox.Visibility = Visibility.Hidden;
+            this.createPasswordBox.Visibility = Visibility.Visible;
+            this.dhaLabel.Visibility = Visibility.Hidden;
+            this.registerButton.Visibility = Visibility.Hidden;
+        }
+
+        private void backToLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
