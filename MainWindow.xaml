@@ -20,9 +20,9 @@
         </DockPanel>
         <Label Content="Autorization" Margin="0,40,0,0" FontSize="32" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="64" Margin="27,148,0,0" VerticalAlignment="Top" Width="64" Source="/userIcon.png"/>
-        <TextBox HorizontalAlignment="Left" Margin="91,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Height="46" Background="White" Foreground="#FF020202" FontSize="20"/>
+        <TextBox x:Name="loginBox" HorizontalAlignment="Left" Margin="91,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Height="46" Background="White" Foreground="#FF020202" FontSize="20"/>
         <Image HorizontalAlignment="Left" Height="64" Margin="17,231,0,0" VerticalAlignment="Top" Width="74" Source="/passwordIcon.png"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="91,231,0,0" VerticalAlignment="Top" Width="236" Height="46"/>
-        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="65" Width="208" FontSize="24" Background="#FF61EC8D" Cursor="Hand"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="65" Width="208" FontSize="24" Background="#FF61EC8D" Cursor="Hand" Click="loginButton_Click"/>
     </Grid>
 </Window>

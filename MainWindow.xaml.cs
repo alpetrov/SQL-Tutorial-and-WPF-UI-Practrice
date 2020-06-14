@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +47,31 @@ namespace SQLFirstTutorial
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             lastPoint = new Point(e.GetPosition(this).X, e.GetPosition(this).Y);
+        }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            DB database = new DB();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand($"SELECT * FROM `users` WHERE `login`=@uL AND `pass`=@uP", database.GetConnection());
+            command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginBox.Text;
+            command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passwordBox.Password;
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            if(table.Rows.Count > 0)
+            {
+                MessageBox.Show("Yes");
+            }
+            else
+            {
+                MessageBox.Show("No");
+            }
         }
     }
 }
