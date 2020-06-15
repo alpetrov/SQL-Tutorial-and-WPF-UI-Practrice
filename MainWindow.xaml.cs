@@ -117,6 +117,21 @@ namespace SQLFirstTutorial
             this.registerButton.Visibility = Visibility.Hidden;
             this.dhaLabel.Visibility = Visibility.Hidden;
             this.deleteAccount_Button.Visibility = Visibility.Visible;
+
+            loginBox.Text = "Login";
+            createPasswordBox.Text = "Password";
+            nameBox.Text = "Name";
+            surnameBox.Text = "Surname";
+            loginChanged = false;
+            passwordChanged = false;
+            passwordCreationChanged = false;
+            nameChanged = false;
+            surnameChanged = false;
+            loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
         }
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
@@ -132,6 +147,21 @@ namespace SQLFirstTutorial
             this.registerButton.Visibility = Visibility.Hidden;
             this.surnameLabel.Visibility = Visibility.Visible;
             this.nameLabel.Visibility = Visibility.Visible;
+
+            loginBox.Text = "Login";
+            createPasswordBox.Text = "Password";
+            nameBox.Text = "Name";
+            surnameBox.Text = "Surname";
+            loginChanged = false;
+            passwordChanged = false;
+            passwordCreationChanged = false;
+            nameChanged = false;
+            surnameChanged = false;
+            loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
 
             this.Width = 720;
         }
@@ -452,6 +482,21 @@ namespace SQLFirstTutorial
             this.registerButton.Visibility = Visibility.Visible;
             this.dhaLabel.Visibility = Visibility.Visible;
             this.deleteAccount_Button.Visibility = Visibility.Hidden;
+
+            loginBox.Text = "Login";
+            createPasswordBox.Text = "Password";
+            nameBox.Text = "Name";
+            surnameBox.Text = "Surname";
+            loginChanged = false;
+            passwordChanged = false;
+            passwordCreationChanged = false;
+            nameChanged = false;
+            surnameChanged = false;
+            loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
         }
     }
 }
