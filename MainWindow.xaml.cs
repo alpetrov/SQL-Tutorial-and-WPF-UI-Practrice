@@ -62,6 +62,25 @@ namespace SQLFirstTutorial
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
+            bool loginInput = true;
+            bool passwordInput = true;
+            if ((loginBox.Text == "Login")|| (loginBox.Text == ""))
+            {
+                loginInput = false;
+            }
+            if ((passwordBox.Password == "Password") || (passwordBox.Password == ""))
+            {
+                passwordInput = false;
+            }
+            if (!(loginInput && passwordInput))
+            {
+                string message = "The following fields are empty:\n";
+                message += $"\n{(loginInput ? "" : "Login")}";
+                message += $"\n{(passwordInput ? "" : "Password")}";
+                MessageBox.Show(message);
+                return;
+            }
+
             DB database = new DB();
 
             DataTable table = new DataTable();
@@ -95,6 +114,7 @@ namespace SQLFirstTutorial
             this.loginButton.Visibility = Visibility.Hidden;
             this.registerButton.Visibility = Visibility.Hidden;
             this.dhaLabel.Visibility = Visibility.Hidden;
+            this.deleteAccount_Button.Visibility = Visibility.Visible;
         }
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
@@ -138,19 +158,19 @@ namespace SQLFirstTutorial
             bool nameInput = true;
             bool surnameInput = true;
 
-            if (loginBox.Text == "Login")
+            if ((loginBox.Text == "Login") || (loginBox.Text == ""))
             {
                 loginInput = false;
             }
-            if (createPasswordBox.Text == "Password")
+            if ((createPasswordBox.Text == "Password") || (createPasswordBox.Text == ""))
             {
                 passwordInput = false;
             }
-            if (nameBox.Text == "Name")
+            if ((nameBox.Text == "Name") || (nameBox.Text == ""))
             {
                 nameInput = false;
             }
-            if (surnameBox.Text == "Surname")
+            if ((surnameBox.Text == "Surname") || (surnameBox.Text == ""))
             {
                 surnameInput = false;
             }
@@ -200,6 +220,16 @@ namespace SQLFirstTutorial
                 createPasswordBox.Text = "Password";
                 nameBox.Text = "Name";
                 surnameBox.Text = "Surname";
+                loginChanged = false;
+                passwordChanged = false;
+                passwordCreationChanged = false;
+                nameChanged = false;
+                surnameChanged = false;
+                loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+                passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+                createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+                nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+                surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
 
                 this.Width = 400;
             }
