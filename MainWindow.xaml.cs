@@ -77,12 +77,24 @@ namespace SQLFirstTutorial
 
             if(table.Rows.Count > 0)
             {
-                MessageBox.Show("Yes");
+                MessageBox.Show("Signed in!");
             }
             else
             {
-                MessageBox.Show("No");
+                MessageBox.Show("Wrong username/password");
+                return;
             }
+
+            this.successLabel.Visibility = Visibility.Visible;
+            this.labelAutorization.Visibility = Visibility.Hidden;
+            this.mainMenuLabel.Visibility = Visibility.Visible;
+            this.loginBox.Visibility = Visibility.Hidden;
+            this.passwordBox.Visibility = Visibility.Hidden;
+            this.userIcon.Visibility = Visibility.Hidden;
+            this.lockIcon.Visibility = Visibility.Hidden;
+            this.loginButton.Visibility = Visibility.Hidden;
+            this.registerButton.Visibility = Visibility.Hidden;
+            this.dhaLabel.Visibility = Visibility.Hidden;
         }
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
