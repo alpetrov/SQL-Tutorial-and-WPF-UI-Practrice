@@ -27,6 +27,7 @@ namespace SQLFirstTutorial
         bool passwordChanged;
         bool nameChanged;
         bool surnameChanged;
+        string currentLogin;
 
         public MainWindow()
         {
@@ -97,6 +98,7 @@ namespace SQLFirstTutorial
             if(table.Rows.Count > 0)
             {
                 MessageBox.Show("Signed in!");
+                currentLogin = loginBox.Text;
             }
             else
             {
@@ -410,6 +412,46 @@ namespace SQLFirstTutorial
             }
             passwordCreationChanged = true;
             createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
+        }
+
+        private void deleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = $"Do you want to delete your account with username \"{currentLogin}\"?";
+            string caption = "Delete my account";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            DB database = new DB();
+
+            MySqlCommand command = new MySqlCommand("DELETE FROM `users` WHERE login=@uL", database.GetConnection());
+            command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = currentLogin;
+
+            database.OpenConnection();
+
+            if (command.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Account deleted...");
+            }
+
+            database.CloseConnection();
+
+            currentLogin = null;
+            this.successLabel.Visibility = Visibility.Hidden;
+            this.labelAutorization.Visibility = Visibility.Visible;
+            this.mainMenuLabel.Visibility = Visibility.Hidden;
+            this.loginBox.Visibility = Visibility.Visible;
+            this.passwordBox.Visibility = Visibility.Visible;
+            this.userIcon.Visibility = Visibility.Visible;
+            this.lockIcon.Visibility = Visibility.Visible;
+            this.loginButton.Visibility = Visibility.Visible;
+            this.registerButton.Visibility = Visibility.Visible;
+            this.dhaLabel.Visibility = Visibility.Visible;
+            this.deleteAccount_Button.Visibility = Visibility.Hidden;
         }
     }
 }
