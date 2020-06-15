@@ -29,9 +29,12 @@ namespace SQLFirstTutorial
         bool surnameChanged;
         string currentLogin;
 
+        Dictionary<string, List<UIElement>> formElements;
+
         public MainWindow()
         {
             InitializeComponent();
+            formElements = SetGroups();
             this.Width = 400;
         }
 
@@ -106,79 +109,26 @@ namespace SQLFirstTutorial
                 return;
             }
 
-            this.successLabel.Visibility = Visibility.Visible;
-            this.labelAutorization.Visibility = Visibility.Hidden;
-            this.mainMenuLabel.Visibility = Visibility.Visible;
-            this.loginBox.Visibility = Visibility.Hidden;
-            this.passwordBox.Visibility = Visibility.Hidden;
-            this.userIcon.Visibility = Visibility.Hidden;
-            this.lockIcon.Visibility = Visibility.Hidden;
-            this.loginButton.Visibility = Visibility.Hidden;
-            this.registerButton.Visibility = Visibility.Hidden;
-            this.dhaLabel.Visibility = Visibility.Hidden;
-            this.deleteAccount_Button.Visibility = Visibility.Visible;
+            CloseLoginForm();
+            OpenMainMenuForm();
 
-            loginBox.Text = "Login";
-            createPasswordBox.Text = "Password";
-            nameBox.Text = "Name";
-            surnameBox.Text = "Surname";
-            loginChanged = false;
-            passwordChanged = false;
-            passwordCreationChanged = false;
-            nameChanged = false;
-            surnameChanged = false;
-            loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            SetDefaultValues();
         }
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
         {
-            this.labelAutorization.Visibility = Visibility.Hidden;
-            this.labelRegistration.Visibility = Visibility.Visible;
-            this.loginButton.Visibility = Visibility.Hidden;
-            this.createAccountButton.Visibility = Visibility.Visible;
-            this.backToLoginButton.Visibility = Visibility.Visible;
-            this.passwordBox.Visibility = Visibility.Hidden;
-            this.createPasswordBox.Visibility = Visibility.Visible;
-            this.dhaLabel.Visibility = Visibility.Hidden;
-            this.registerButton.Visibility = Visibility.Hidden;
-            this.surnameLabel.Visibility = Visibility.Visible;
-            this.nameLabel.Visibility = Visibility.Visible;
+            CloseLoginForm();
+            OpenRegistrationForm();
 
-            loginBox.Text = "Login";
-            createPasswordBox.Text = "Password";
-            nameBox.Text = "Name";
-            surnameBox.Text = "Surname";
-            loginChanged = false;
-            passwordChanged = false;
-            passwordCreationChanged = false;
-            nameChanged = false;
-            surnameChanged = false;
-            loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-            surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+            SetDefaultValues();
 
             this.Width = 720;
         }
 
         private void backToLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            this.labelAutorization.Visibility = Visibility.Visible;
-            this.labelRegistration.Visibility = Visibility.Hidden;
-            this.loginButton.Visibility = Visibility.Visible;
-            this.createAccountButton.Visibility = Visibility.Hidden;
-            this.backToLoginButton.Visibility = Visibility.Hidden;
-            this.passwordBox.Visibility = Visibility.Visible;
-            this.createPasswordBox.Visibility = Visibility.Hidden;
-            this.dhaLabel.Visibility = Visibility.Visible;
-            this.registerButton.Visibility = Visibility.Visible;
-            this.surnameLabel.Visibility = Visibility.Hidden;
-            this.nameLabel.Visibility = Visibility.Hidden;
+            CloseRegistrationForm();
+            OpenLoginForm();
 
             this.Width = 400;
         }
@@ -236,32 +186,10 @@ namespace SQLFirstTutorial
             {
                 MessageBox.Show("Аккаунт создан.");
 
-                this.labelAutorization.Visibility = Visibility.Visible;
-                this.labelRegistration.Visibility = Visibility.Hidden;
-                this.loginButton.Visibility = Visibility.Visible;
-                this.createAccountButton.Visibility = Visibility.Hidden;
-                this.backToLoginButton.Visibility = Visibility.Hidden;
-                this.passwordBox.Visibility = Visibility.Visible;
-                this.createPasswordBox.Visibility = Visibility.Hidden;
-                this.dhaLabel.Visibility = Visibility.Visible;
-                this.registerButton.Visibility = Visibility.Visible;
-                this.surnameLabel.Visibility = Visibility.Hidden;
-                this.nameLabel.Visibility = Visibility.Hidden;
+                CloseRegistrationForm();
+                OpenLoginForm();
 
-                loginBox.Text = "Login";
-                createPasswordBox.Text = "Password";
-                nameBox.Text = "Name";
-                surnameBox.Text = "Surname";
-                loginChanged = false;
-                passwordChanged = false;
-                passwordCreationChanged = false;
-                nameChanged = false;
-                surnameChanged = false;
-                loginBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-                passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-                createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-                nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
-                surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+                SetDefaultValues();
 
                 this.Width = 400;
             }
@@ -471,20 +399,18 @@ namespace SQLFirstTutorial
             database.CloseConnection();
 
             currentLogin = null;
-            this.successLabel.Visibility = Visibility.Hidden;
-            this.labelAutorization.Visibility = Visibility.Visible;
-            this.mainMenuLabel.Visibility = Visibility.Hidden;
-            this.loginBox.Visibility = Visibility.Visible;
-            this.passwordBox.Visibility = Visibility.Visible;
-            this.userIcon.Visibility = Visibility.Visible;
-            this.lockIcon.Visibility = Visibility.Visible;
-            this.loginButton.Visibility = Visibility.Visible;
-            this.registerButton.Visibility = Visibility.Visible;
-            this.dhaLabel.Visibility = Visibility.Visible;
-            this.deleteAccount_Button.Visibility = Visibility.Hidden;
 
+            CloseMainMenuForm();
+            OpenLoginForm();
+
+            SetDefaultValues();
+        }
+
+        void SetDefaultValues()
+        {
             loginBox.Text = "Login";
             createPasswordBox.Text = "Password";
+            passwordBox.Password = "Password";
             nameBox.Text = "Name";
             surnameBox.Text = "Surname";
             loginChanged = false;
@@ -497,6 +423,90 @@ namespace SQLFirstTutorial
             createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
             nameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
             surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Gray);
+        }
+
+        Dictionary<string, List<UIElement>> SetGroups()
+        {
+            Dictionary<string, List<UIElement>> elements = new Dictionary<string, List<UIElement>>();
+
+            List<UIElement> loginForm = new List<UIElement>();
+            loginForm.Add(loginBox);
+            loginForm.Add(passwordBox);
+            loginForm.Add(loginButton);
+            loginForm.Add(dhaLabel);
+            loginForm.Add(labelAutorization);
+            loginForm.Add(registerButton);
+            loginForm.Add(userIcon);
+            loginForm.Add(lockIcon);
+            elements.Add("loginForm", loginForm);
+
+            List<UIElement> registrationForm = new List<UIElement>();
+            registrationForm.Add(loginBox);
+            registrationForm.Add(userIcon);
+            registrationForm.Add(lockIcon);
+            registrationForm.Add(createPasswordBox);
+            registrationForm.Add(createAccountButton);
+            registrationForm.Add(labelRegistration);
+            registrationForm.Add(backToLoginButton);
+            registrationForm.Add(nameLabel);
+            registrationForm.Add(surnameLabel);
+            elements.Add("registrationForm", registrationForm);
+
+            List<UIElement> mainMenuForm = new List<UIElement>();
+            mainMenuForm.Add(mainMenuLabel);
+            mainMenuForm.Add(deleteAccountButton);
+            mainMenuForm.Add(successLabel);
+            elements.Add("mainMenuForm", mainMenuForm);
+
+            return elements;
+        }
+
+        void OpenLoginForm()
+        {
+            foreach (var item in formElements["loginForm"])
+            {
+                item.Visibility = Visibility.Visible;
+            }
+        }
+
+        void CloseLoginForm()
+        {
+            foreach (var item in formElements["loginForm"])
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+        }
+
+        void OpenRegistrationForm()
+        {
+            foreach (var item in formElements["registrationForm"])
+            {
+                item.Visibility = Visibility.Visible;
+            }
+        }
+
+        void CloseRegistrationForm()
+        {
+            foreach (var item in formElements["registrationForm"])
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+        }
+
+        void OpenMainMenuForm()
+        {
+            foreach (var item in formElements["mainMenuForm"])
+            {
+                item.Visibility = Visibility.Visible;
+            }
+        }
+
+        void CloseMainMenuForm()
+        {
+            foreach (var item in formElements["mainMenuForm"])
+            {
+                item.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
