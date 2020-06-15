@@ -23,6 +23,7 @@ namespace SQLFirstTutorial
     public partial class MainWindow : Window
     {
         bool loginChanged;
+        bool passwordCreationChanged;
         bool passwordChanged;
         bool nameChanged;
         bool surnameChanged;
@@ -38,7 +39,11 @@ namespace SQLFirstTutorial
         {
             if(e.LeftButton == MouseButtonState.Pressed)
             {
-                if (((e.GetPosition(this).X > 91)&&(e.GetPosition(this).X<327))&&((e.GetPosition(this).Y>148) && (e.GetPosition(this).Y<194))|| (e.GetPosition(this).Y > 231) && (e.GetPosition(this).Y < 277))
+                if ((e.GetPosition(this).X > 91)&&(e.GetPosition(this).X<327)&&((e.GetPosition(this).Y>148) && (e.GetPosition(this).Y<194) || (e.GetPosition(this).Y > 231) && (e.GetPosition(this).Y < 277)))
+                {
+
+                }
+                else if ((e.GetPosition(this).X > 448) && (e.GetPosition(this).X < 684) && ((e.GetPosition(this).Y > 148) && (e.GetPosition(this).Y < 194)) || (e.GetPosition(this).Y > 231) && (e.GetPosition(this).Y < 277))
                 {
 
                 }
@@ -63,7 +68,7 @@ namespace SQLFirstTutorial
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand($"SELECT * FROM `users` WHERE `login`=@uL AND `pass`=@uP", database.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login`=@uL AND `pass`=@uP", database.GetConnection());
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginBox.Text;
             command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passwordBox.Password;
 
@@ -116,12 +121,116 @@ namespace SQLFirstTutorial
 
         private void createAccountButton_Click(object sender, RoutedEventArgs e)
         {
+            bool loginInput = true;
+            bool passwordInput = true;
+            bool nameInput = true;
+            bool surnameInput = true;
 
+            if (loginBox.Text == "Login")
+            {
+                loginInput = false;
+            }
+            if (createPasswordBox.Text == "Password")
+            {
+                passwordInput = false;
+            }
+            if (nameBox.Text == "Name")
+            {
+                nameInput = false;
+            }
+            if (surnameBox.Text == "Surname")
+            {
+                surnameInput = false;
+            }
+            if(!(loginInput&& passwordInput && nameInput && surnameInput))
+            {
+                string message = "The following fields are empty:\n";
+                message += $"\n{(loginInput?"":"Login")}";
+                message += $"\n{(passwordInput ? "":"Password")}";
+                message += $"\n{(nameInput ? "":"Name")}";
+                message += $"\n{(surnameInput ? "":"Surname")}";
+                MessageBox.Show(message);
+                return;
+            }
+
+            if (isUserExists())
+            {
+                return;
+            }
+
+            DB database = new DB();
+
+            MySqlCommand command = new MySqlCommand("INSERT INTO `users`(`login`, `pass`, `name`, `surname`) VALUES (@uL, @uP, @uN, @uS)", database.GetConnection());
+            command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginBox.Text;
+            command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = createPasswordBox.Text;
+            command.Parameters.Add("@uN", MySqlDbType.VarChar).Value = nameBox.Text;
+            command.Parameters.Add("@uS", MySqlDbType.VarChar).Value = surnameBox.Text;
+
+            database.OpenConnection();
+
+            if(command.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Аккаунт создан.");
+
+                this.labelAutorization.Visibility = Visibility.Visible;
+                this.labelRegistration.Visibility = Visibility.Hidden;
+                this.loginButton.Visibility = Visibility.Visible;
+                this.createAccountButton.Visibility = Visibility.Hidden;
+                this.backToLoginButton.Visibility = Visibility.Hidden;
+                this.passwordBox.Visibility = Visibility.Visible;
+                this.createPasswordBox.Visibility = Visibility.Hidden;
+                this.dhaLabel.Visibility = Visibility.Visible;
+                this.registerButton.Visibility = Visibility.Visible;
+                this.surnameLabel.Visibility = Visibility.Hidden;
+                this.nameLabel.Visibility = Visibility.Hidden;
+
+                loginBox.Text = "Login";
+                createPasswordBox.Text = "Password";
+                nameBox.Text = "Name";
+                surnameBox.Text = "Surname";
+
+                this.Width = 400;
+            }
+            else
+            {
+                MessageBox.Show("Аккаунт не создан");
+            }
+
+            database.CloseConnection();
+        }
+
+        public bool isUserExists()
+        {
+            DB database = new DB();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login`=@uL", database.GetConnection());
+            command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginBox.Text;
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("This login already exists. Please, Input other login.");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 
         private void loginBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!loginChanged)
+            {
+                loginBox.Text = "";
+            } 
             loginChanged = true;
             loginBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
         }
@@ -151,7 +260,7 @@ namespace SQLFirstTutorial
             {
                 if (this.passwordBox.Password == "")
                 {
-                    this.passwordBox.Password = "password";
+                    this.passwordBox.Password = "Password";
                 }
             }
         }
@@ -166,12 +275,20 @@ namespace SQLFirstTutorial
 
         private void passwordBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!passwordChanged)
+            {
+                passwordBox.Password = "";
+            }
             passwordChanged = true;
             passwordBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
         }
 
         private void nameBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!nameChanged)
+            {
+                nameBox.Text = "";
+            }
             nameChanged = true;
             nameBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
         }
@@ -197,6 +314,10 @@ namespace SQLFirstTutorial
 
         private void surnameBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!surnameChanged)
+            {
+                surnameBox.Text = "";
+            }
             surnameChanged = true;
             surnameBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
         }
@@ -222,7 +343,7 @@ namespace SQLFirstTutorial
 
         private void createPasswordBox_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (!passwordChanged)
+            if (!passwordCreationChanged)
             {
                 this.createPasswordBox.Text = "";
             }
@@ -230,7 +351,7 @@ namespace SQLFirstTutorial
 
         private void createPasswordBox_MouseLeave(object sender, MouseEventArgs e)
         {
-            if(!passwordChanged)
+            if(!passwordCreationChanged)
             {
                 if (this.createPasswordBox.Text == "")
                 {
@@ -241,7 +362,11 @@ namespace SQLFirstTutorial
 
         private void createPasswordBox_KeyDown(object sender, KeyEventArgs e)
         {
-            passwordChanged = true;
+            if (!passwordCreationChanged)
+            {
+                createPasswordBox.Text = "";
+            }
+            passwordCreationChanged = true;
             createPasswordBox.SetCurrentValue(ForegroundProperty, Brushes.Black);
         }
     }
