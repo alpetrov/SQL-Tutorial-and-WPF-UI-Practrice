@@ -540,7 +540,7 @@ namespace SQLFirstTutorial
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataTable dataTable = new DataTable();
 
-            MySqlCommand command = new MySqlCommand("SELECT `id`, `login` FROM `users`", database.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT `id` AS 'ID', `login` AS `Username` FROM `users`", database.GetConnection());
             adapter.SelectCommand = command;
             adapter.Fill(dataTable);
 

@@ -38,7 +38,12 @@
         <Label x:Name="mainMenuLabel" Content="Main menu (developing...)" Margin="27,0,0,0" FontSize="20" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden" Width="523"/>
         <Button x:Name="deleteAccountButton" Content="Delete my account" HorizontalAlignment="Left" Margin="91,344,0,0" VerticalAlignment="Top" Width="208" Height="32" RenderTransformOrigin="0.495,0.776" FontSize="20" Click="deleteAccount_Click" Visibility="Hidden"/>
         <Button x:Name="seeUsersList_Button" Content="See users list" HorizontalAlignment="Left" Margin="91,294,0,0" VerticalAlignment="Top" Width="208" Height="32" RenderTransformOrigin="0.495,0.776" FontSize="20" Click="seeUsersListButton_Click" Visibility="Hidden"/>
-        <DataGrid x:Name="usersListGrid" ItemsSource="{Binding}"  Margin="62,147,62,81" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+        <DataGrid x:Name="usersListGrid" ItemsSource="{Binding}"  Margin="62,147,62,81" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" CanUserReorderColumns="False"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="100" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Username" Width="*" Binding="{Binding Username}"/>
+            </DataGrid.Columns>
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
