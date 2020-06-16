@@ -184,7 +184,7 @@ namespace SQLFirstTutorial
 
             if(command.ExecuteNonQuery() == 1)
             {
-                MessageBox.Show("Аккаунт создан.");
+                MessageBox.Show("Account created.");
 
                 CloseRegistrationForm();
                 OpenLoginForm();
@@ -195,7 +195,7 @@ namespace SQLFirstTutorial
             }
             else
             {
-                MessageBox.Show("Аккаунт не создан");
+                MessageBox.Show("Account hasn't been created");
             }
 
             database.CloseConnection();
@@ -456,9 +456,31 @@ namespace SQLFirstTutorial
             mainMenuForm.Add(mainMenuLabel);
             mainMenuForm.Add(deleteAccountButton);
             mainMenuForm.Add(successLabel);
+            mainMenuForm.Add(seeUsersList_Button);
             elements.Add("mainMenuForm", mainMenuForm);
 
+            List<UIElement> usersListForm = new List<UIElement>();
+            usersListForm.Add(usersListGrid);
+            usersListForm.Add(usersListLabel);
+            elements.Add("usersListForm", usersListForm);
+
             return elements;
+        }
+
+        void OpenUsersListForm()
+        {
+            foreach (var item in formElements["usersListForm"])
+            {
+                item.Visibility = Visibility.Visible;
+            }
+        }
+
+        void CloseUsersListForm()
+        {
+            foreach (var item in formElements["usersListForm"])
+            {
+                item.Visibility = Visibility.Hidden;
+            }
         }
 
         void OpenLoginForm()
@@ -507,6 +529,22 @@ namespace SQLFirstTutorial
             {
                 item.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void seeUsersListButton_Click(object sender, RoutedEventArgs e)
+        {
+            CloseMainMenuForm();
+            OpenUsersListForm();
+
+            DB database = new DB();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            DataTable dataTable = new DataTable();
+
+            MySqlCommand command = new MySqlCommand("SELECT `id`, `login` FROM `users`", database.GetConnection());
+            adapter.SelectCommand = command;
+            adapter.Fill(dataTable);
+
+            usersListGrid.DataContext = dataTable.DefaultView;
         }
     }
 }
