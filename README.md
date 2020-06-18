@@ -18,6 +18,6 @@ Write me your thoughts about the code and my app. I am beginner and any code-rev
 ____
 ## Screenshots
 ![Autorization](https://i.imgur.com/xhOXopH.png "Autorization")
-![Registration](https://prnt.sc/t29450 "Registration")
-![Main menu](https://prnt.sc/t294au "Main menu")
-![Users list](https://prnt.sc/t294is "Users list")
+![Registration](https://i.imgur.com/N5GxJNl.png "Registration")
+![Main menu](https://i.imgur.com/9IP8ooi.png "Main menu")
+![Users list](https://i.imgur.com/Dw6R1WJ.png "Users list")
