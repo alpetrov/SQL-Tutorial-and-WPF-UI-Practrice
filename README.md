@@ -7,7 +7,7 @@ There I am trying to use __mySQL__ database in __C#__ project for the first time
 ____
 ## Features:
 
-The main idea was to crate a __simple autorization form__ with opportunity to register new users and store all the data in mySQL database.
+The main idea was to crate a __simple autorization form__ with opportunity to __register new users__ and store all the data in mySQL database.
 There is also an option that can show a __list of all the users and their Ids__, or user can __delete their account__.
 In total I worked with data selection commands, deleting and adding new data in database.
 I also tried some new WPF UI-design features to make my app more user-friendly.
