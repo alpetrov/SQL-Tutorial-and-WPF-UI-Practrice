@@ -1,6 +1,6 @@
 # About the program
 
-Thnaks you for the interest in my project. The thing is that recently I learned SQL-language and administration of mySQL database and I wanted to figure out how to implement databases in my C# projects.
+Thanks you for the interest in my project. The thing is that recently I learned SQL-language and administration of mySQL database and I wanted to figure out how to implement databases in my C# projects.
 As I haven't got any server, the database is hosted on localhost (the app won't work on your PC if you don't have the same localhost settings).
 
 There I am trying to use __mySQL__ database in __C#__ project for the first time (for this objective I selected WPF because it is less complex than ASP), along with this I'll try to test some new features in WPF UI design.
