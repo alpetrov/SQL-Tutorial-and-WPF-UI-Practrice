@@ -17,7 +17,7 @@ Now I'm thinking about adding some filter options and search in the list of user
 Write me your thoughts about the code and my app. I am beginner and any code-review is very useful.
 ____
 ## Screenshots
-![Autorization](https://prnt.sc/t293qu, "Autorization")
-![Registration](https://prnt.sc/t29450, "Registration")
-![Main menu](https://prnt.sc/t294au, "Main menu")
-![Users list](https://prnt.sc/t294is, "Users list")
+![Autorization](https://prnt.sc/t293qu "Autorization")
+![Registration](https://prnt.sc/t29450 "Registration")
+![Main menu](https://prnt.sc/t294au "Main menu")
+![Users list](https://prnt.sc/t294is "Users list")
