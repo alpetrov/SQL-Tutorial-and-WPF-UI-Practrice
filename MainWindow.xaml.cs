@@ -27,9 +27,14 @@ namespace SQLFirstTutorial
         bool passwordChanged;
         bool nameChanged;
         bool surnameChanged;
+        
         string currentLogin;
 
         Dictionary<string, List<UIElement>> formElements;
+
+        List<User> users = new List<User>();
+        int currentPage = 1;
+        const int EPP = 9;
 
         public MainWindow()
         {
@@ -462,6 +467,9 @@ namespace SQLFirstTutorial
             List<UIElement> usersListForm = new List<UIElement>();
             usersListForm.Add(usersListGrid);
             usersListForm.Add(usersListLabel);
+            usersListForm.Add(pageNumberLabel);
+            usersListForm.Add(previousPageButton);
+            usersListForm.Add(nextPageButton);
             elements.Add("usersListForm", usersListForm);
 
             return elements;
@@ -544,7 +552,36 @@ namespace SQLFirstTutorial
             adapter.SelectCommand = command;
             adapter.Fill(dataTable);
 
-            usersListGrid.DataContext = dataTable.DefaultView;
+            users.Clear();
+            foreach (var row in dataTable.Rows)
+            {
+                User user = (User)Activator.CreateInstance(typeof(User), row);
+                users.Add(user);
+            }
+
+            usersListGrid.DataContext = users.GetRange(0, EPP);
+        }
+
+        private void nextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if((currentPage+1) * EPP - users.Count > 8) { return; }
+            currentPage++;
+            pageNumberLabel.Content = $"Page number: {currentPage}";
+            if (currentPage * EPP <= users.Count)
+            {
+                usersListGrid.DataContext = users.GetRange((currentPage - 1) * EPP, currentPage * EPP);
+            }
+            else
+            {
+                usersListGrid.DataContext = users.Skip(Math.Max(0, (currentPage-1) * EPP));
+            }
+        }
+
+        private void previousPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(currentPage!=1) currentPage--;
+            pageNumberLabel.Content = $"Page number: {currentPage}";
+            usersListGrid.DataContext = users.GetRange((currentPage - 1) * EPP, currentPage * EPP);
         }
     }
 }

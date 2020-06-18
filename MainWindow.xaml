@@ -38,10 +38,10 @@
         <Label x:Name="mainMenuLabel" Content="Main menu (developing...)" Margin="27,0,0,0" FontSize="20" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden" Width="523"/>
         <Button x:Name="deleteAccountButton" Content="Delete my account" HorizontalAlignment="Left" Margin="91,344,0,0" VerticalAlignment="Top" Width="208" Height="32" RenderTransformOrigin="0.495,0.776" FontSize="20" Click="deleteAccount_Click" Visibility="Hidden"/>
         <Button x:Name="seeUsersList_Button" Content="See users list" HorizontalAlignment="Left" Margin="91,294,0,0" VerticalAlignment="Top" Width="208" Height="32" RenderTransformOrigin="0.495,0.776" FontSize="20" Click="seeUsersListButton_Click" Visibility="Hidden"/>
-        <DataGrid x:Name="usersListGrid" ItemsSource="{Binding}"  Margin="62,147,62,81" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" CanUserReorderColumns="False"
-                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="usersListGrid" ItemsSource="{Binding}"  Margin="62,147,62,93" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" CanUserReorderColumns="False"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Width="100" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="ID" Width="100" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Username" Width="*" Binding="{Binding Username}"/>
             </DataGrid.Columns>
             <DataGrid.RenderTransform>
@@ -54,5 +54,8 @@
             </DataGrid.RenderTransform>
         </DataGrid>
         <Label x:Name="usersListLabel" Content="Users list" Margin="0,40,0,0" FontSize="32" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label x:Name="pageNumberLabel" Content="Page number: 1" Margin="57,359,0,0" FontSize="20" FontFamily="Rockwell Extra Bold" Foreground="#FFE8E3E3" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden" Width="228" Height="48"/>
+        <Button x:Name="previousPageButton" Content="&lt;" HorizontalAlignment="Left" Margin="253,360,0,0" VerticalAlignment="Top" Height="27" Width="32" Visibility="Hidden" Click="previousPageButton_Click"/>
+        <Button x:Name="nextPageButton" Content="&gt;" HorizontalAlignment="Left" Margin="291,360,0,0" VerticalAlignment="Top" Height="27" Width="32" Visibility="Hidden" Click="nextPageButton_Click"/>
     </Grid>
 </Window>
