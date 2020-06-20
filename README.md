@@ -9,10 +9,9 @@ ____
 
 The main idea was to crate a __simple autorization form__ with opportunity to __register new users__ and store all the data in mySQL database.
 There is also an option that can show a __list of all the users and their Ids__, or user can __delete their account__.
+In the list of all users user can __serach__ for other ids.
 In total I worked with data selection commands, deleting and adding new data in database.
 I also tried some new WPF UI-design features to make my app more user-friendly.
-
-Now I'm thinking about adding some filter options and search in the list of users. 
 
 Write me your thoughts about the code and my app. I am beginner and any code-review is very useful.
 ____
@@ -20,4 +19,4 @@ ____
 ![Autorization](https://i.imgur.com/xhOXopH.png "Autorization")
 ![Registration](https://i.imgur.com/N5GxJNl.png "Registration")
 ![Main menu](https://i.imgur.com/9IP8ooi.png "Main menu")
-![Users list](https://i.imgur.com/Dw6R1WJ.png "Users list")
+![Users list](https://i.imgur.com/ReDQona.png "Users list")

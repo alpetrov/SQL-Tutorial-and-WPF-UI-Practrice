@@ -32,7 +32,7 @@ namespace SQLFirstTutorial
 
         Dictionary<string, List<UIElement>> formElements;
 
-        List<User> users = new List<User>();
+        List<User> displayedUsers = new List<User>();
         int currentPage = 1;
         const int EPP = 9;
 
@@ -470,6 +470,9 @@ namespace SQLFirstTutorial
             usersListForm.Add(pageNumberLabel);
             usersListForm.Add(previousPageButton);
             usersListForm.Add(nextPageButton);
+            usersListForm.Add(searchBox);
+            usersListForm.Add(searchButton);
+            usersListForm.Add(backToMenuButton);
             elements.Add("usersListForm", usersListForm);
 
             return elements;
@@ -552,28 +555,35 @@ namespace SQLFirstTutorial
             adapter.SelectCommand = command;
             adapter.Fill(dataTable);
 
-            users.Clear();
+            displayedUsers.Clear();
             foreach (var row in dataTable.Rows)
             {
                 User user = (User)Activator.CreateInstance(typeof(User), row);
-                users.Add(user);
+                displayedUsers.Add(user);
             }
 
-            usersListGrid.DataContext = users.GetRange(0, EPP);
+            if (displayedUsers.Count >= EPP)
+            {
+                usersListGrid.DataContext = displayedUsers.GetRange(0, EPP);
+            }
+            else
+            {
+                usersListGrid.DataContext = displayedUsers;
+            }
         }
 
         private void nextPageButton_Click(object sender, RoutedEventArgs e)
         {
-            if((currentPage+1) * EPP - users.Count > 8) { return; }
+            if((currentPage+1) * EPP - displayedUsers.Count > 8) { return; }
             currentPage++;
             pageNumberLabel.Content = $"Page number: {currentPage}";
-            if (currentPage * EPP <= users.Count)
+            if (currentPage * EPP <= displayedUsers.Count)
             {
-                usersListGrid.DataContext = users.GetRange((currentPage - 1) * EPP, currentPage * EPP);
+                usersListGrid.DataContext = displayedUsers.GetRange((currentPage - 1) * EPP, currentPage * EPP);
             }
             else
             {
-                usersListGrid.DataContext = users.Skip(Math.Max(0, (currentPage-1) * EPP));
+                usersListGrid.DataContext = displayedUsers.Skip(Math.Max(0, (currentPage-1) * EPP));
             }
         }
 
@@ -581,7 +591,46 @@ namespace SQLFirstTutorial
         {
             if(currentPage!=1) currentPage--;
             pageNumberLabel.Content = $"Page number: {currentPage}";
-            usersListGrid.DataContext = users.GetRange((currentPage - 1) * EPP, currentPage * EPP);
+            usersListGrid.DataContext = displayedUsers.GetRange((currentPage - 1) * EPP, currentPage * EPP);
+        }
+
+        private void backToMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            CloseUsersListForm();
+            OpenMainMenuForm();
+        }
+
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (searchBox.Text.Trim() == "") 
+            { 
+                seeUsersListButton_Click(sender, e);
+                return;
+            }
+            DB database = new DB();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            DataTable dataTable = new DataTable();
+
+            MySqlCommand command = new MySqlCommand("SELECT `id` AS 'ID', `login` AS `Username` FROM `users` WHERE `login` LIKE @inD", database.GetConnection());
+            command.Parameters.Add("@inD", MySqlDbType.VarChar).Value = "%" + searchBox.Text.Trim() + "%";
+            adapter.SelectCommand = command;
+            adapter.Fill(dataTable);
+
+            displayedUsers.Clear();
+            foreach (var row in dataTable.Rows)
+            {
+                User user = (User)Activator.CreateInstance(typeof(User), row);
+                displayedUsers.Add(user);
+            }
+
+            if (displayedUsers.Count >= EPP)
+            {
+                usersListGrid.DataContext = displayedUsers.GetRange(0, EPP);
+            }
+            else
+            {
+                usersListGrid.DataContext = displayedUsers;
+            }
         }
     }
 }
